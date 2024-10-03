@@ -8,6 +8,7 @@ public class PokemonManagementSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PokemonManagementSystemApplication.class, args);
+		System.out.println("HELLO");
 	}
 
 }
