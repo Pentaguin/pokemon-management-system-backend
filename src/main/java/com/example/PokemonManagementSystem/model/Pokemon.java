@@ -1,5 +1,6 @@
 package com.example.PokemonManagementSystem.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +21,11 @@ public class Pokemon {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "box_id")
+    @Nullable
     private Box box;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
+    @Nullable
     private Team team;
 }
