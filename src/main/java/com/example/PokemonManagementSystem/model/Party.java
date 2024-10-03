@@ -10,13 +10,13 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Team {
+public class Party {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer teamLimit;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "party", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pokemon> pokemons = new ArrayList<>();
 }

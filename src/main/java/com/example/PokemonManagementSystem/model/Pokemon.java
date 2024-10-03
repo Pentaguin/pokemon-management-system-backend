@@ -25,7 +25,7 @@ public class Pokemon {
     private Box box;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "party_id")
     @Nullable
-    private Team team;
+    private Party party;
 }
