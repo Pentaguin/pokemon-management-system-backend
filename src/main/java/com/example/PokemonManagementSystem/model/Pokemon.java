@@ -8,6 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "pokemon")
 public class Pokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +21,10 @@ public class Pokemon {
     private Integer generation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "box_id")
-    @Nullable
+    @JoinColumn(name = "box_id", referencedColumnName = "box_id")
     private Box box;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "party_id")
-    @Nullable
+    @JoinColumn(name = "party_id", referencedColumnName = "party_id")
     private Party party;
 }

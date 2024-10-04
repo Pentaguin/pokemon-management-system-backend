@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PokemonDto {
+    private Long id;
     private Integer pokeApiId;
     private String name;
     private String imageUrl;

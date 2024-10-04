@@ -10,12 +10,17 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(name = "party")
 public class Party {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "party_id")
     private Long id;
 
-    private Integer teamLimit;
+    private Integer partyLimit;
+
+    public Party() {
+    }
 
     @OneToMany(mappedBy = "party", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pokemon> pokemons = new ArrayList<>();

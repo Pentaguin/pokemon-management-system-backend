@@ -6,8 +6,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PokemonTransformer {
-    public PokemonDto toDto(Pokemon pokemon) {
+    public static PokemonDto toDto(Pokemon pokemon) {
         PokemonDto dto = new PokemonDto();
+        dto.setId(pokemon.getId());
         dto.setPokeApiId(pokemon.getPokeApiId());
         dto.setName(pokemon.getName());
         dto.setImageUrl(pokemon.getImageUrl());
@@ -16,8 +17,9 @@ public class PokemonTransformer {
         return dto;
     }
 
-    public Pokemon toModel(PokemonDto dto) {
+    public static Pokemon toModel(PokemonDto dto) {
         Pokemon pokemon = new Pokemon();
+        pokemon.setId(dto.getId());
         pokemon.setPokeApiId(dto.getPokeApiId());
         pokemon.setName(dto.getName());
         pokemon.setImageUrl(dto.getImageUrl());

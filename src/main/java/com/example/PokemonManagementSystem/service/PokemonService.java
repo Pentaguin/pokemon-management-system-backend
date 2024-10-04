@@ -9,16 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class PokemonService {
     private final PokemonRepository pokemonRepository;
-    private final PokemonTransformer pokemonTransformer;
 
-    private PokemonService(PokemonRepository pokemonRepository, PokemonTransformer pokemonTransformer){
+    private PokemonService(PokemonRepository pokemonRepository){
         this.pokemonRepository = pokemonRepository;
-        this.pokemonTransformer = pokemonTransformer;
     }
 
     public PokemonDto createPokemon(PokemonDto pokemonDto) {
-        Pokemon pokemon = pokemonTransformer.toModel(pokemonDto);
+        Pokemon pokemon = PokemonTransformer.toModel(pokemonDto);
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
-        return pokemonTransformer.toDto(savedPokemon);
+        return PokemonTransformer.toDto(savedPokemon);
     }
 }
