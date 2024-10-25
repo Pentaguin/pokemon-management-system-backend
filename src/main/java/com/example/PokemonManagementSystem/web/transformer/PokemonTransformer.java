@@ -9,7 +9,7 @@ public class PokemonTransformer {
     public static PokemonDto toDto(Pokemon pokemon) {
         PokemonDto dto = new PokemonDto();
         dto.setId(pokemon.getId());
-        dto.setPokeApiId(pokemon.getPokeApiId());
+        dto.setApiId(pokemon.getPokeApiId());
         dto.setName(pokemon.getName());
         dto.setImageUrl(pokemon.getImageUrl());
         dto.setType(pokemon.getType());
@@ -20,7 +20,7 @@ public class PokemonTransformer {
     public static Pokemon toModel(PokemonDto dto) {
         Pokemon pokemon = new Pokemon();
         pokemon.setId(dto.getId());
-        pokemon.setPokeApiId(dto.getPokeApiId());
+        pokemon.setPokeApiId(dto.getApiId());
         pokemon.setName(dto.getName());
         pokemon.setImageUrl(dto.getImageUrl());
         pokemon.setType(dto.getType());

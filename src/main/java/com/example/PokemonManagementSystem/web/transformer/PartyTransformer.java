@@ -13,8 +13,7 @@ public class PartyTransformer {
     public static PartyDto toDto(Party party) {
         PartyDto dto = new PartyDto();
 
-        dto.setTeamLimit(party.getPartyLimit());
-        dto.setPokemons(party.getPokemons().stream()
+        dto.setPokemon(party.getPokemons().stream()
                 .map(PokemonTransformer::toDto)
                 .collect(Collectors.toList()));
         return dto;
@@ -22,9 +21,8 @@ public class PartyTransformer {
 
     public static Party toModel(PartyDto partyDto) {
         Party party = new Party();
-        party.setPartyLimit(partyDto.getTeamLimit());
 
-        List<Pokemon> pokemons = partyDto.getPokemons().stream()
+        List<Pokemon> pokemons = partyDto.getPokemon().stream()
                 .map(PokemonTransformer::toModel)
                 .collect(Collectors.toList());
 
