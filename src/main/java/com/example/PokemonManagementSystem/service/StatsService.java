@@ -17,7 +17,10 @@ public class StatsService {
     }
 
     public void saveStats(StatsDto statsDto){
-        statsRepository.save(statsMapper.toModel(statsDto));
+        Stats stats = statsRepository.findById(1L).orElse(new Stats());
+        stats.setGold(stats.getGold());
+        stats.setClicks(statsDto.getClicks());
+        statsRepository.save(stats);
     }
 
     public StatsDto getStats(){
