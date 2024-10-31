@@ -16,7 +16,7 @@ public class Item {
     private String itemName;
     private String itemType;  // Type of item (e.g., "healing", "held_item", "berry")
     private String description;
-    private Integer quantity;
+    private int quantity;
     private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)

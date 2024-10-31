@@ -17,7 +17,7 @@ public class Party {
     @Column(name = "party_id")
     private Long id;
 
-    private Integer partyLimit = 6;
+    private int partyLimit = 6;
 
     @OneToMany(mappedBy = "party", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pokemon> pokemon = new ArrayList<>();
