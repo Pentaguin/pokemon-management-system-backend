@@ -7,17 +7,20 @@ import com.example.PokemonManagementSystem.model.Pokemon;
 import com.example.PokemonManagementSystem.repository.PartyRepository;
 import com.example.PokemonManagementSystem.web.dto.PartyDto;
 import com.example.PokemonManagementSystem.web.dto.PokemonDto;
-import com.example.PokemonManagementSystem.web.transformer.PartyTransformer;
-import com.example.PokemonManagementSystem.web.transformer.PokemonTransformer;
+import com.example.PokemonManagementSystem.web.mapper.PartyMapper;
+import com.example.PokemonManagementSystem.web.mapper.PokemonMapper;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
 public class PartyService {
     private final PartyRepository partyRepository;
-
-    private PartyService(PartyRepository partyRepository){
+    private final PartyMapper partyMapper;
+    private final PokemonMapper pokemonMapper;
+    private PartyService(PartyRepository partyRepository, PartyMapper partyMapper, PokemonMapper pokemonMapper){
         this.partyRepository = partyRepository;
+        this.partyMapper = partyMapper;
+        this.pokemonMapper = pokemonMapper;
     }
 
     /**
@@ -34,18 +37,18 @@ public class PartyService {
                     newParty.setPartyLimit(6);
                     return partyRepository.save(newParty);
                 });
-        Pokemon pokemon = PokemonTransformer.toModel(pokemonDto);
+        Pokemon pokemon = pokemonMapper.toModel(pokemonDto);
 
         // Party is full
-        if(party.getPokemons().size() >= party.getPartyLimit()){
+        if(party.getPokemon().size() >= party.getPartyLimit()){
             throw new PartyIsFullException(String.format("Party is full. Only %d pokemon allowed.", party.getPartyLimit()));
         }
 
         // Add Pokemon to the party
-        party.getPokemons().add(pokemon);
+        party.getPokemon().add(pokemon);
         pokemon.setParty(party);
         partyRepository.save(party);
-        return PartyTransformer.toDto(party);
+        return partyMapper.toDto(party);
     }
 
     /**
@@ -55,7 +58,7 @@ public class PartyService {
      */
     public Optional<PartyDto> getParty() {
         return partyRepository.findById(1L)
-                .map(PartyTransformer::toDto);
+                .map(partyMapper::toDto);
     }
 
     /**
@@ -70,7 +73,7 @@ public class PartyService {
 
         if (optionalParty.isPresent()) {
             Party party = optionalParty.get();
-            boolean removed = party.getPokemons().removeIf(pokemon -> pokemon.getId().equals(pokemonId));
+            boolean removed = party.getPokemon().removeIf(pokemon -> pokemon.getId().equals(pokemonId));
 
             if (removed) {
                 partyRepository.save(party);

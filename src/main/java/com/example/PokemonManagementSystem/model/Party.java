@@ -20,5 +20,5 @@ public class Party {
     private Integer partyLimit = 6;
 
     @OneToMany(mappedBy = "party", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pokemon> pokemons = new ArrayList<>();
+    private List<Pokemon> pokemon = new ArrayList<>();
 }
