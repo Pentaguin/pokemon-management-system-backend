@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StatsDto {
+public class PlayerStatusDto {
     private int clicks;
     private int gold;
 }
