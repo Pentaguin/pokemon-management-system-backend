@@ -77,6 +77,7 @@ public class PlayerStatusServiceTest {
 
         PlayerStatusDto playerStatusDto = new PlayerStatusDto();
         playerStatusDto.setClicks(100);
+        playerStatusDto.setGold(200);
 
         when(playerStatusRepository.findById(1L)).thenReturn(Optional.of(existingPlayerStatus));
 
@@ -86,6 +87,6 @@ public class PlayerStatusServiceTest {
         // Assert
         verify(playerStatusRepository).save(existingPlayerStatus);
         assert(existingPlayerStatus.getClicks() == 100);
-        assert(existingPlayerStatus.getGold() == 50);
+        assert(existingPlayerStatus.getGold() == 200);
     }
 }

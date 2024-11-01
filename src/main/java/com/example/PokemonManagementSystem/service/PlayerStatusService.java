@@ -18,7 +18,7 @@ public class PlayerStatusService {
 
     public void saveStats(PlayerStatusDto playerStatusDto){
         PlayerStatus playerStatus = playerStatusRepository.findById(1L).orElse(new PlayerStatus());
-        playerStatus.setGold(playerStatus.getGold());
+        playerStatus.setGold(playerStatusDto.getGold());
         playerStatus.setClicks(playerStatusDto.getClicks());
         playerStatusRepository.save(playerStatus);
     }
@@ -27,4 +27,10 @@ public class PlayerStatusService {
         PlayerStatus playerStatus = playerStatusRepository.findById(1L).orElse(new PlayerStatus());
         return playerStatusMapper.toDto(playerStatus);
     }
+
+//    public void updateGold(int newGoldAmount){
+//        PlayerStatusDto playerStatusDto = getStats();
+//        playerStatusDto.setGold(newGoldAmount);
+//        saveStats(playerStatusDto);
+//    }
 }
