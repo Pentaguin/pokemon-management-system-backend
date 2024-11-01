@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class PlayerStatusDto {
     private int clicks;
-    private int gold;
+    private double gold;
 }

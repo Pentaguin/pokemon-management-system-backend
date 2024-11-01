@@ -14,5 +14,5 @@ public class PlayerStatus {
     private Long id;
 
     private int clicks;
-    private int gold;
+    private double gold;
 }
