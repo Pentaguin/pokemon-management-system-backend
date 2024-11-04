@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PlayerStatusMapper {
-
     PlayerStatusDto toDto(PlayerStatus playerStatus);
     PlayerStatus toModel(PlayerStatusDto playerStatusDto);
 }

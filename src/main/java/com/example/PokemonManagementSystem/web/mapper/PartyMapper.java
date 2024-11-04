@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PartyMapper {
-
     PartyDto toDto(Party party);
     Party toModel(PartyDto partyDto);
 }

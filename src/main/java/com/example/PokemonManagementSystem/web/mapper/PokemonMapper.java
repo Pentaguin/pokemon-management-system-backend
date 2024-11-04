@@ -4,8 +4,8 @@ import com.example.PokemonManagementSystem.model.Pokemon;
 import com.example.PokemonManagementSystem.web.dto.PokemonDto;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring") // This allows Spring to manage the mapper as a bean
+@Mapper(componentModel = "spring")
 public interface PokemonMapper {
     PokemonDto toDto(Pokemon pokemon);
-    Pokemon toModel(PokemonDto dto);
+    Pokemon toModel(PokemonDto pokemonDto);
 }
