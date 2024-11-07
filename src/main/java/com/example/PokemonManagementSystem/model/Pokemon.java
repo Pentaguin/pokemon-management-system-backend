@@ -1,5 +1,6 @@
 package com.example.PokemonManagementSystem.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "pokemon")
 public class Pokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +21,10 @@ public class Pokemon {
     private Integer generation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "box_id")
+    @JoinColumn(name = "box_id", referencedColumnName = "box_id")
     private Box box;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @JoinColumn(name = "party_id", referencedColumnName = "party_id")
+    private Party party;
 }

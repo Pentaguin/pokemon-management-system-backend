@@ -10,14 +10,14 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "bag")
-public class Bag {
+@Table(name = "shop")
+public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "bag",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> items = new ArrayList<>();
-
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShopItem> shopItems = new ArrayList<>();
 
 }
+
