@@ -52,54 +52,54 @@ public class ShopService {
         shopRepository.delete(shop);
     }
 
-    public void buyItems(Map<Long, Integer> itemsWithQuantities) {
-        // TODO something with shop id?
-        double totalCost = 0.0;
-
-        // Iterate over the map containing item IDs and their quantities
-        for (Map.Entry<Long, Integer> entry : itemsWithQuantities.entrySet()) {
-            Long itemId = entry.getKey();
-            Integer quantity = entry.getValue();
-
-            ShopItem shopItem = shopRepository.findShopItemById(itemId);
-
-            if (shopItem == null) {
-                throw new ItemNotFoundException("ShopItem not found for ID: " + itemId);
-            }
-
-            // Calculate total cost
-            totalCost += shopItem.getPrice() * quantity;
-        }
-
-        // Check if the player has enough gold
-        PlayerStatusDto playerStatusDto = playerStatusService.getStats();
-        if (playerStatusDto.getGold() < totalCost) {
-            throw new NotEnoughGoldException("Not enough gold to complete the purchase.");
-        }
-
-        // Deduct gold and update inventory
-        for (Map.Entry<Long, Integer> entry : itemsWithQuantities.entrySet()) {
-            Long itemId = entry.getKey();
-            Integer quantity = entry.getValue();
-
-            ShopItem shopItem = shopRepository.findShopItemById(itemId);
-            if (shopItem == null) {
-                throw new ItemNotFoundException("ShopItem not found for ID: " + itemId);
-            }
-
-            //TODO BAG UPDATE QUANTITY
-            // Update player's inventory, assuming a method exists to add items
-
-        }
-
-        // Deduct the total cost from player's gold
-        playerStatusDto.setGold(playerStatusDto.getGold() - totalCost);
-        playerStatusService.saveStats(playerStatusDto);
-    }
-
-
-    public void sellItem(Map<Long, Item> items){
-        // increase gold, and updating bag quantity
-    }
+//    public void buyItems(Map<Long, Integer> itemsWithQuantities) {
+//        // TODO something with shop id?
+//        double totalCost = 0.0;
+//
+//        // Iterate over the map containing item IDs and their quantities
+//        for (Map.Entry<Long, Integer> entry : itemsWithQuantities.entrySet()) {
+//            Long itemId = entry.getKey();
+//            Integer quantity = entry.getValue();
+//
+//            ShopItem shopItem = shopRepository.findShopItemById(itemId);
+//
+//            if (shopItem == null) {
+//                throw new ItemNotFoundException("ShopItem not found for ID: " + itemId);
+//            }
+//
+//            // Calculate total cost
+//            totalCost += shopItem.getPrice() * quantity;
+//        }
+//
+//        // Check if the player has enough gold
+//        PlayerStatusDto playerStatusDto = playerStatusService.getStats();
+//        if (playerStatusDto.getGold() < totalCost) {
+//            throw new NotEnoughGoldException("Not enough gold to complete the purchase.");
+//        }
+//
+//        // Deduct gold and update inventory
+//        for (Map.Entry<Long, Integer> entry : itemsWithQuantities.entrySet()) {
+//            Long itemId = entry.getKey();
+//            Integer quantity = entry.getValue();
+//
+//            ShopItem shopItem = shopRepository.findShopItemById(itemId);
+//            if (shopItem == null) {
+//                throw new ItemNotFoundException("ShopItem not found for ID: " + itemId);
+//            }
+//
+//            //TODO BAG UPDATE QUANTITY
+//            // Update player's inventory, assuming a method exists to add items
+//
+//        }
+//
+//        // Deduct the total cost from player's gold
+//        playerStatusDto.setGold(playerStatusDto.getGold() - totalCost);
+//        playerStatusService.saveStats(playerStatusDto);
+//    }
+//
+//
+//    public void sellItem(Map<Long, Item> items){
+//        // increase gold, and updating bag quantity
+//    }
 
 }
