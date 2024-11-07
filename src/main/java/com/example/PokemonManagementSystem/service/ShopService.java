@@ -2,6 +2,7 @@ package com.example.PokemonManagementSystem.service;
 
 import com.example.PokemonManagementSystem.exception.ItemNotFoundException;
 import com.example.PokemonManagementSystem.exception.NotEnoughGoldException;
+import com.example.PokemonManagementSystem.exception.ShopNotFoundException;
 import com.example.PokemonManagementSystem.model.Item;
 import com.example.PokemonManagementSystem.model.Shop;
 import com.example.PokemonManagementSystem.model.ShopItem;
@@ -44,7 +45,15 @@ public class ShopService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteShopById(Long shopId){
+        Shop shop = shopRepository.findById(shopId)
+                .orElseThrow(() -> new ShopNotFoundException("Shop with id: " + shopId + " not found."));
+
+        shopRepository.delete(shop);
+    }
+
     public void buyItems(Map<Long, Integer> itemsWithQuantities) {
+        // TODO something with shop id?
         double totalCost = 0.0;
 
         // Iterate over the map containing item IDs and their quantities

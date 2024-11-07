@@ -1,11 +1,11 @@
 package com.example.PokemonManagementSystem.service;
 
-import com.example.PokemonManagementSystem.model.Item;
+import com.example.PokemonManagementSystem.exception.ItemNotFoundException;
+import com.example.PokemonManagementSystem.exception.ShopNotFoundException;
 import com.example.PokemonManagementSystem.model.Shop;
 import com.example.PokemonManagementSystem.model.ShopItem;
 import com.example.PokemonManagementSystem.repository.ShopItemRepository;
 import com.example.PokemonManagementSystem.repository.ShopRepository;
-import com.example.PokemonManagementSystem.utl.ColorLogger;
 import com.example.PokemonManagementSystem.web.dto.ItemDto;
 import com.example.PokemonManagementSystem.web.dto.ShopItemDto;
 import com.example.PokemonManagementSystem.web.mapper.ItemMapper;
@@ -34,21 +34,36 @@ public class ShopItemService {
     }
 
     public List<ShopItemDto> getShopItemsByShopId(Long shopId) {
-        // TODO throw ShopNotFoundException
+        // Try to retrieve the shop.
         Shop shop = shopRepository.findById(shopId)
-                .orElseThrow(() -> new RuntimeException("Shop not found"));
+                .orElseThrow(() -> new ShopNotFoundException("Shop with id: " + shopId + " not found."));
 
+        // Get all the items from the shop.
         return shop.getShopItems().stream()
                 .map(shopItemMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public ShopItemDto createShopItem(Long shopId, ShopItemDto shopItemDto) {
-        // Retrieve the shop, throwing an exception if not found
+    public ShopItemDto getShopItemByIdAndByShopId(Long shopId, Long shopItemId) {
+        // Try to retrieve the shop
         Shop shop = shopRepository.findById(shopId)
-                .orElseThrow(() -> new RuntimeException("Shop not found"));
+                .orElseThrow(() -> new ShopNotFoundException("Shop with id: " + shopId + " not found."));
 
-        // Ensure itemDto is not null and has a valid ID
+        // Try to retrieve the shop item from the shop.
+        ShopItem shopItem = shop.getShopItems().stream()
+                .filter(item -> item.getId().equals(shopItemId))
+                .findFirst()
+                .orElseThrow(() -> new ItemNotFoundException("Shop item with id: " + shopItemId + " not found"));
+
+        return shopItemMapper.toDto(shopItem);
+    }
+
+    public ShopItemDto createShopItem(Long shopId, ShopItemDto shopItemDto) {
+        // Try to retrieve the shop
+        Shop shop = shopRepository.findById(shopId)
+                .orElseThrow(() -> new ShopNotFoundException("Shop with id: " + shopId + " not found."));
+
+        // Ensure itemDto is not null
         if (shopItemDto.getItemDto() == null) {
             throw new RuntimeException("Item details are missing in the request");
         }
@@ -66,6 +81,6 @@ public class ShopItemService {
         return shopItemMapper.toDto(shopItem);
     }
 
-    // TODO DELETE SHOP
+    // TODO DELETE SHOPITEM
 
 }
