@@ -5,29 +5,24 @@ import com.example.PokemonManagementSystem.exception.PokemonNotFoundException;
 import com.example.PokemonManagementSystem.model.Party;
 import com.example.PokemonManagementSystem.model.Pokemon;
 import com.example.PokemonManagementSystem.repository.PartyRepository;
-import com.example.PokemonManagementSystem.web.dto.PartyDto;
-import com.example.PokemonManagementSystem.web.dto.PokemonDto;
-import com.example.PokemonManagementSystem.web.mapper.PartyMapper;
-import com.example.PokemonManagementSystem.web.mapper.PokemonMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PartyService {
     private final PartyRepository partyRepository;
-    private final PartyMapper partyMapper;
-    private final PokemonMapper pokemonMapper;
 
-    public PartyDto addPokemonToParty(PokemonDto pokemonDto) {
+    public Party addPokemonToParty(Pokemon pokemon) {
         Party party = partyRepository.findById(1L)
                 .orElseGet(() -> {
                     Party newParty = new Party();
                     newParty.setPartyLimit(6);
                     return partyRepository.save(newParty);
                 });
-        Pokemon pokemon = pokemonMapper.toModel(pokemonDto);
 
         // Party is full
         if(party.getPokemon().size() >= party.getPartyLimit()){
@@ -38,12 +33,15 @@ public class PartyService {
         party.getPokemon().add(pokemon);
         pokemon.setParty(party);
         partyRepository.save(party);
-        return partyMapper.toDto(party);
+        return party;
     }
 
-    public Optional<PartyDto> getParty() {
-        return partyRepository.findById(1L)
-                .map(partyMapper::toDto);
+    public Party getParty() {
+        return partyRepository.findById(1L).orElseGet(() -> {
+            Party emptyParty = new Party();
+            emptyParty.setPokemon(Collections.emptyList());
+            return emptyParty;
+        });
     }
 
     public boolean deletePokemonFromParty(Long pokemonId) {

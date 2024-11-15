@@ -6,8 +6,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = ShopItemMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ShopMapper {
     @Mapping(target = "shopItems", source = "shopItems")
     ShopDto toDto(Shop shop);
+
+    List<ShopDto> toDtoList(List<Shop> shops);
 }

@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = ItemMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ShopItemMapper {
     @Mapping(source = "item", target = "itemDto")
@@ -13,4 +15,6 @@ public interface ShopItemMapper {
 
     @Mapping(source = "itemDto", target = "item")
     ShopItem toModel(ShopItemDto shopItemDto);
+
+    List<ShopItemDto> toDtoList(List<ShopItem> shopItems);
 }

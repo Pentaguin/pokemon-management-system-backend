@@ -1,42 +1,23 @@
 package com.example.PokemonManagementSystem.service;
 
-import com.example.PokemonManagementSystem.exception.ItemNotFoundException;
-import com.example.PokemonManagementSystem.exception.NotEnoughGoldException;
 import com.example.PokemonManagementSystem.exception.ShopNotFoundException;
-import com.example.PokemonManagementSystem.model.Item;
 import com.example.PokemonManagementSystem.model.Shop;
-import com.example.PokemonManagementSystem.model.ShopItem;
 import com.example.PokemonManagementSystem.repository.ShopRepository;
-import com.example.PokemonManagementSystem.web.dto.PlayerStatusDto;
-import com.example.PokemonManagementSystem.web.dto.ShopDto;
-import com.example.PokemonManagementSystem.web.dto.ShopItemDto;
-import com.example.PokemonManagementSystem.web.mapper.ShopItemMapper;
-import com.example.PokemonManagementSystem.web.mapper.ShopMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ShopService {
-
-    private final PlayerStatusService playerStatusService;
     private final ShopRepository shopRepository;
-    private final ShopItemMapper shopItemMapper;
-    private final ShopMapper shopMapper;
 
-    public ShopDto createShop() {
-        Shop savedShop = shopRepository.save(new Shop());
-        return shopMapper.toDto(savedShop);
+    public Shop createShop() {
+        return shopRepository.save(new Shop());
     }
 
-    public List<ShopDto> getAllShops() {
-        List<Shop> shops = shopRepository.findAll();
-        return shops.stream()
-                .map(shopMapper::toDto)
-                .collect(Collectors.toList());
+    public List<Shop> getAllShops() {
+        return shopRepository.findAll();
     }
 
     public void deleteShopById(Long shopId){
