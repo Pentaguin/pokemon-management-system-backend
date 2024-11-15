@@ -4,17 +4,14 @@ import com.example.PokemonManagementSystem.model.PlayerStatus;
 import com.example.PokemonManagementSystem.repository.PlayerStatusRepository;
 import com.example.PokemonManagementSystem.web.dto.PlayerStatusDto;
 import com.example.PokemonManagementSystem.web.mapper.PlayerStatusMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PlayerStatusService {
     private final PlayerStatusRepository playerStatusRepository;
     private final PlayerStatusMapper playerStatusMapper;
-
-    private PlayerStatusService(PlayerStatusRepository playerStatusRepository, PlayerStatusMapper playerStatusMapper){
-        this.playerStatusRepository = playerStatusRepository;
-        this.playerStatusMapper = playerStatusMapper;
-    }
 
     public void saveStats(PlayerStatusDto playerStatusDto){
         PlayerStatus playerStatus = playerStatusRepository.findById(1L).orElse(new PlayerStatus());

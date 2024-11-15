@@ -16,8 +16,7 @@ public class SwaggerConfig {
         return openAPI
                 .info(new Info().title("Pokemon Management System")
                         .description("Pokemon Management System")
-                        .version("v0.0.1")
-                        .license(new License().name("Apache 2.0").url("https://quintor.nl")));
+                        .version("v0.0.1"));
     }
 }
 

@@ -10,28 +10,21 @@ import com.example.PokemonManagementSystem.web.dto.ItemDto;
 import com.example.PokemonManagementSystem.web.dto.ShopItemDto;
 import com.example.PokemonManagementSystem.web.mapper.ItemMapper;
 import com.example.PokemonManagementSystem.web.mapper.ShopItemMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ShopItemService {
-
 
     private final ShopItemMapper shopItemMapper;
     private final ShopRepository shopRepository;
     private final ShopItemRepository shopItemRepository;
     private final ItemService itemService;
     private final ItemMapper itemMapper;
-
-    private ShopItemService(ShopItemMapper shopItemMapper, ShopRepository shopRepository, ShopItemRepository shopItemRepository, ItemService itemService, ItemMapper itemMapper){
-        this.shopItemMapper = shopItemMapper;
-        this.shopRepository = shopRepository;
-        this.shopItemRepository = shopItemRepository;
-        this.itemService = itemService;
-        this.itemMapper = itemMapper;
-    }
 
     public List<ShopItemDto> getShopItemsByShopId(Long shopId) {
         // Try to retrieve the shop.

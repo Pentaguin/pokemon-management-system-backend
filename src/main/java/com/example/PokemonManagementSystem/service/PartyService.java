@@ -9,27 +9,17 @@ import com.example.PokemonManagementSystem.web.dto.PartyDto;
 import com.example.PokemonManagementSystem.web.dto.PokemonDto;
 import com.example.PokemonManagementSystem.web.mapper.PartyMapper;
 import com.example.PokemonManagementSystem.web.mapper.PokemonMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PartyService {
     private final PartyRepository partyRepository;
     private final PartyMapper partyMapper;
     private final PokemonMapper pokemonMapper;
-    private PartyService(PartyRepository partyRepository, PartyMapper partyMapper, PokemonMapper pokemonMapper){
-        this.partyRepository = partyRepository;
-        this.partyMapper = partyMapper;
-        this.pokemonMapper = pokemonMapper;
-    }
 
-    /**
-     * Adds a Pokémon to the party.
-     *
-     * @param pokemonDto The Pokémon data to be added.
-     * @return pokemonDto: The updated Party dto
-     * @throws PartyIsFullException if the party already is full.
-     */
     public PartyDto addPokemonToParty(PokemonDto pokemonDto) {
         Party party = partyRepository.findById(1L)
                 .orElseGet(() -> {
@@ -51,23 +41,11 @@ public class PartyService {
         return partyMapper.toDto(party);
     }
 
-    /**
-     * Try to retrieve a party.
-     *
-     * @return The current party, wrapped in an {@code Optional}.
-     */
     public Optional<PartyDto> getParty() {
         return partyRepository.findById(1L)
                 .map(partyMapper::toDto);
     }
 
-    /**
-     * Removes a Pokémon from the party by its ID.
-     *
-     * @param pokemonId The ID of the Pokémon to remove.
-     * @return {@code true} if the Pokémon was successfully removed;
-     * @throws PokemonNotFoundException if no Pokémon with the given ID exists in the party.
-     */
     public boolean deletePokemonFromParty(Long pokemonId) {
         Optional<Party> optionalParty = partyRepository.findById(1L);
 
@@ -85,8 +63,6 @@ public class PartyService {
         // TODO throw new PartyNotFoundException
         return false;
     }
-
-
 
 
 }

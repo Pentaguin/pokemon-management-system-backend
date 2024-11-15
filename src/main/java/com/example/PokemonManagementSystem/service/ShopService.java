@@ -12,26 +12,20 @@ import com.example.PokemonManagementSystem.web.dto.ShopDto;
 import com.example.PokemonManagementSystem.web.dto.ShopItemDto;
 import com.example.PokemonManagementSystem.web.mapper.ShopItemMapper;
 import com.example.PokemonManagementSystem.web.mapper.ShopMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ShopService {
 
     private final PlayerStatusService playerStatusService;
     private final ShopRepository shopRepository;
     private final ShopItemMapper shopItemMapper;
     private final ShopMapper shopMapper;
-
-    private ShopService(PlayerStatusService playerStatusService, ShopRepository shopRepository, ShopItemMapper shopItemMapper, ShopMapper shopMapper){
-        this.playerStatusService = playerStatusService;
-        this.shopRepository = shopRepository;
-        this.shopItemMapper = shopItemMapper;
-        this.shopMapper = shopMapper;
-    }
 
     public ShopDto createShop() {
         Shop savedShop = shopRepository.save(new Shop());

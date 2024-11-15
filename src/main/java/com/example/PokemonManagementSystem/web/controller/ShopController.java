@@ -5,6 +5,8 @@ import com.example.PokemonManagementSystem.service.ShopService;
 import com.example.PokemonManagementSystem.web.dto.ShopDto;
 import com.example.PokemonManagementSystem.web.dto.ShopItemDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/shop")
+@RequiredArgsConstructor
+@Tag(name = "/shop", description = "Operations on Shop")
 public class ShopController {
     private final ShopService shopService;
     private final ShopItemService shopItemService;
-
-    private ShopController(ShopService shopService, ShopItemService shopItemService){
-        this.shopService = shopService;
-        this.shopItemService = shopItemService;
-    }
 
     @PostMapping
     @Operation(summary = "Create a new shop")
