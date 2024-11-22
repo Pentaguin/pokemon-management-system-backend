@@ -1,13 +1,11 @@
 package com.example.PokemonManagementSystem.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ItemDto {
-    @JsonIgnore
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     private Long itemApiId;
     private String itemName;

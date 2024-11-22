@@ -1,11 +1,11 @@
 package com.example.PokemonManagementSystem.web.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ShopItemDto {
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     private ItemDto itemDto;
     private double price;

@@ -1,13 +1,9 @@
 package com.example.PokemonManagementSystem.web.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class PartyDto {
     private List<PokemonDto> pokemon;
-
 }

@@ -1,10 +1,8 @@
 package com.example.PokemonManagementSystem.web.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class PlayerStatusDto {
     private int clicks;
     private double gold;

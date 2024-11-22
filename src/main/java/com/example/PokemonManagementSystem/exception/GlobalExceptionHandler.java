@@ -43,7 +43,10 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 
-
+    @ExceptionHandler(ShopItemNotFoundException.class)
+    public ResponseEntity<String> shopItemNotFoundException(ShopItemNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
 }
-
-

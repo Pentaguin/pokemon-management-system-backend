@@ -6,18 +6,18 @@ import com.example.PokemonManagementSystem.web.dto.PartyDto;
 import com.example.PokemonManagementSystem.web.dto.PokemonDto;
 import com.example.PokemonManagementSystem.web.mapper.PartyMapper;
 import com.example.PokemonManagementSystem.web.mapper.PokemonMapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/party/pokemon")
 @RequiredArgsConstructor
+@Tag(name = "/party", description = "Operations on Party")
 public class PartyController {
     private final PartyService partyService;
     private final PartyMapper partyMapper;
