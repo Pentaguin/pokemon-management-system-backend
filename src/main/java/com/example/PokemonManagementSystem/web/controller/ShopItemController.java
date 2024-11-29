@@ -71,16 +71,16 @@ public class ShopItemController {
         return ResponseEntity.ok().build();
     }
 
-//    @PostMapping("/sell")
-//    @Operation(summary = "Sell item")
-//    public ResponseEntity<Void> sellShopItems(@PathVariable Long shopId, @RequestBody List<ShopItemTransactionDto> shopItemTransactionDtos){
-//        Map<Long, Integer> itemsWithQuantities = new HashMap<>();
-//
-//        for (ShopItemTransactionDto dto : shopItemTransactionDtos) {
-//            itemsWithQuantities.put(dto.getItemId(), dto.getQuantity());
-//        }
-//
-//        shopItemService.buyItems(shopId, itemsWithQuantities);
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping("/sell")
+    @Operation(summary = "Sell item")
+    public ResponseEntity<Void> sellShopItems(@PathVariable Long shopId, @RequestBody List<ShopItemTransactionDto> shopItemTransactionDtos){
+        Map<Long, Integer> itemsWithQuantities = new HashMap<>();
+
+        for (ShopItemTransactionDto dto : shopItemTransactionDtos) {
+            itemsWithQuantities.put(dto.getItemId(), dto.getQuantity());
+        }
+
+        shopItemService.sellItems(shopId, itemsWithQuantities);
+        return ResponseEntity.ok().build();
+    }
 }

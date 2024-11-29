@@ -119,10 +119,34 @@ public class ShopItemService {
         playerStatusService.saveStats(playerStatus);
     }
 
-//    public void sellItem(Map<Long, Item> items){
-    //TODO but not everything in your bag exists in that shop. some shop has it. some not.
-//        // increase gold, and updating bag quantity
-//    }
+    public void sellItems(Long shopId, Map<Long, Integer> itemsWithQuantities){
+        Shop shop = getShop(shopId);
+        List<ShopItem> shopItems = shop.getShopItems();
+        double totalCost = 0.0;
+
+        for (Map.Entry<Long, Integer> entry : itemsWithQuantities.entrySet()) {
+            Long itemId = entry.getKey();
+            Integer quantity = entry.getValue();
+
+            // TODO check if the quantity is <= the item in your bag
+
+            // Check if the item exists in the shop
+            ShopItem shopItem = shopItems.stream()
+                    .filter(item -> item.getId().equals(itemId))
+                    .findFirst()
+                    .orElseThrow(() -> new ItemNotFoundException("ShopItem with ID: " + itemId + " not found in Shop ID: " + shopId));
+
+            // Calculate total cost
+            totalCost += shopItem.getPrice() * quantity;
+        }
+
+        //TODO UPDATE PLAYER INVENTORY
+
+        // Update player's gold
+        PlayerStatus playerStatus = playerStatusService.getStats();
+        playerStatus.setGold(playerStatus.getGold() + totalCost);
+        playerStatusService.saveStats(playerStatus);
+    }
 
     private Shop getShop(Long shopId){
         return shopRepository.findById(shopId)
